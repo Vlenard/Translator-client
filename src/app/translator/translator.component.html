@@ -1,0 +1,24 @@
+<div class="container-fluid px-5 mt-5">
+    <div class="mx-5 p-3 border rounded shadow-sm">
+        <div class="row">
+            <div class="col-md-12 col-lg-5 p-2">
+                <translator-container [langs]="sourceLangs" detect="detect" title="Source">
+                    <translator-input (translate)="translate($event)" />
+                </translator-container>
+            </div>
+            <div class="col-md-12 col-lg-2 d-flex justify-content-center align-items-center">
+                <button class="btn btn-light px-5 rounded">Swap</button>
+            </div>
+            <div class="col-md-12 col-lg-5 p-2">
+                <translator-container title="Target">
+                    <div class="p-2 border rounded translator-input">{{translatedText}}</div>
+                </translator-container>
+            </div>
+        </div>
+
+        <div *ngIf="translatedText.length > 1" class="row">
+            <div class="col">Characters: {{translatedText.length}}</div>
+            <div class="col d-flex justify-content-end">Maximum character: {{maximumCharacter}}</div>
+        </div>
+    </div>
+</div>
