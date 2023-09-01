@@ -1,8 +1,8 @@
 <div class="container-fluid px-5 mt-5">
-    <div class="mx-5 p-3 border rounded shadow-sm">
+    <div *ngIf="targetLangs.length !== 0; else loading" class="mx-5 p-3 border rounded shadow-sm">
         <div class="row">
             <div class="col-md-12 col-lg-5 p-2">
-                <translator-container [langs]="sourceLangs" detect="detect" title="Source">
+                <translator-container [langs]="sourceLangs" (onLangChange)="setSourceLang($event)" title="Source">
                     <translator-input (translate)="translate($event)" />
                 </translator-container>
             </div>
@@ -10,7 +10,7 @@
                 <button class="btn btn-light px-5 rounded">Swap</button>
             </div>
             <div class="col-md-12 col-lg-5 p-2">
-                <translator-container title="Target">
+                <translator-container [langs]="targetLangs" [target]="targetLangCode" (onLangChange)="setTargetLang($event)" title="Target">
                     <div class="p-2 border rounded translator-input">{{translatedText}}</div>
                 </translator-container>
             </div>
@@ -22,3 +22,12 @@
         </div>
     </div>
 </div>
+
+<ng-template #loading>
+    <div class="d-flex align-items-center flex-column">
+        <div class="spinner-border" role="status">
+          <span class="sr-only"></span>
+        </div>
+        <span>We working on :)</span>
+      </div>
+</ng-template>
