@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Language } from 'src/utils/Language';
 
 @Component({
@@ -6,13 +6,19 @@ import { Language } from 'src/utils/Language';
   templateUrl: './container.component.html',
   styleUrls: ['./container.component.css']
 })
-export class ContainerComponent {
+export class ContainerComponent implements OnInit {
+
     @Input() title: string = "";
     @Input() langs: Array<Language> = [];
-    @Input() target: string | null = null;
+    @Input() code: string | null = null;
+    @Input() target: boolean = false;
     @Output("onLangChange") onLangChangeEmitter = new EventEmitter<number>();
 
+    ngOnInit() {
+      
+    }
+
     onLangChange(ev: Event){
-      this.onLangChangeEmitter.emit((ev.target as HTMLSelectElement).selectedIndex);
+      this.onLangChangeEmitter.emit((ev.target as HTMLSelectElement).selectedIndex - (!this.target ? 1 : 0));
     }
 }

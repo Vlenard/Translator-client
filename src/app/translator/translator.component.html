@@ -2,15 +2,15 @@
     <div *ngIf="targetLangs.length !== 0; else loading" class="mx-5 p-3 border rounded shadow-sm">
         <div class="row">
             <div class="col-md-12 col-lg-5 p-2">
-                <translator-container [langs]="sourceLangs" (onLangChange)="setSourceLang($event)" title="Source">
+                <translator-container [langs]="sourceLangs" (onLangChange)="setSourceLang($event)" [code]="sourceLangCode" title="Source">
                     <translator-input (translate)="translate($event)" />
                 </translator-container>
             </div>
             <div class="col-md-12 col-lg-2 d-flex justify-content-center align-items-center">
-                <button class="btn btn-light px-5 rounded">Swap</button>
+                <button (click)="swap()" [disabled]="buttonIsDisabled" class="btn btn-light px-5 rounded">Swap</button>
             </div>
             <div class="col-md-12 col-lg-5 p-2">
-                <translator-container [langs]="targetLangs" [target]="targetLangCode" (onLangChange)="setTargetLang($event)" title="Target">
+                <translator-container [langs]="targetLangs" [target]="true" [code]="targetLangCode" (onLangChange)="setTargetLang($event)" title="Target">
                     <div class="p-2 border rounded translator-input">{{translatedText}}</div>
                 </translator-container>
             </div>

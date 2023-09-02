@@ -8,6 +8,7 @@ import { Language, SupportedLanguages } from 'src/utils/Language';
   styleUrls: ['./translator.component.css']
 })
 export class TranslatorComponent implements OnInit{
+  buttonIsDisabled: boolean = true;
   maximumCharacter: number = 1000;
   translatedText: string = "";
   sourceLangCode: string | null = null;
@@ -21,11 +22,6 @@ export class TranslatorComponent implements OnInit{
       .then((data: SupportedLanguages) => {
         this.sourceLangs = data.source;
         this.targetLangs = data.target;
-        for (let i = 0; i < this.targetLangs.length; i++) {
-          const element = this.targetLangs[i];
-          console.log(element.code === this.targetLangCode);
-          
-        }
       });
   }
 
@@ -34,10 +30,30 @@ export class TranslatorComponent implements OnInit{
   }
 
   setSourceLang(index: number){
+
+    if(index === -1){
+      this.buttonIsDisabled = true;
+      return;
+    }
+
     this.sourceLangCode = this.sourceLangs[index].code;
+    this.buttonIsDisabled = false;
+
+    if(this.sourceLangCode === this.targetLangCode){
+      this.targetLangCode = this.targetLangs.find(el => el.code.includes("en"))?.code as string;
+    }
   }
 
   setTargetLang(index: number){
     this.targetLangCode = this.targetLangs[index].code;
+  }
+
+  swap(){
+
+    console.log( this.sourceLangCode + this.targetLangCode);
+    const temp: string = this.sourceLangCode as string; // only avaible when sourceLandCode is not null
+    this.sourceLangCode = this.targetLangCode;
+    this.targetLangCode = temp;
+    console.log( this.sourceLangCode + this.targetLangCode);
   }
 }
