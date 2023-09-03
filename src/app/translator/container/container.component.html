@@ -2,8 +2,8 @@
     <div class="mb-3 d-flex justify-content-lg-start justify-content-center">
         <div class="form-floating me-5">
             <select class="form-select" id="floatingSelect" (change)="onLangChange($event)" aria-label="Floating label select example">
-                <option *ngIf="!target" [attr.selected]="">Detected language</option>
-                <option *ngFor="let lang of langs" value={{lang.code}} [attr.selected]="lang.code === code ? true : null">{{lang.name}}</option>
+                <option *ngIf="!target" [attr.selected]="code === '' ? true : null">Detected language</option>
+                <option *ngFor="let lang of langs" value={{lang.code}} [attr.selected]="(lang.code.includes(code) && code.length !== 0) ? true : null">{{lang.name}}</option>
             </select>
             <label for="floatingSelect">{{title}}</label>
           </div>

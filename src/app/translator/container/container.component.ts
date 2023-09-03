@@ -10,7 +10,7 @@ export class ContainerComponent implements OnInit {
 
     @Input() title: string = "";
     @Input() langs: Array<Language> = [];
-    @Input() code: string | null = null;
+    @Input() code: string = "";
     @Input() target: boolean = false;
     @Output("onLangChange") onLangChangeEmitter = new EventEmitter<number>();
 

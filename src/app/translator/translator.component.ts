@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { env } from 'src/utils/Environment';
 import { Language, SupportedLanguages } from 'src/utils/Language';
+import { TranslateResponse, translate } from 'src/utils/Translate';
 
 @Component({
   selector: 'translator',
@@ -11,7 +12,8 @@ export class TranslatorComponent implements OnInit{
   buttonIsDisabled: boolean = true;
   maximumCharacter: number = 1000;
   translatedText: string = "";
-  sourceLangCode: string | null = null;
+  typedText: string = "";
+  sourceLangCode: string = "";
   targetLangCode: string = navigator.language.split("-")[0];
   sourceLangs: Array<Language> = [];
   targetLangs: Array<Language> = [];
@@ -25,8 +27,22 @@ export class TranslatorComponent implements OnInit{
       });
   }
 
-  translate(value: string) {
-    this.translatedText = value;
+  onTranslate(value: string) {
+    this.typedText = value.trim();
+
+    if(this.typedText.length > 1){
+      translate({
+        text: this.typedText,
+        source: this.sourceLangCode !== "" ? this.sourceLangCode : null,
+        target: this.targetLangCode
+      }).then((res: TranslateResponse) => {
+        if(res.errorMessage === null){
+          this.translatedText = res.translatedText as string;
+        }
+      });
+    }else{
+      this.translatedText = this.typedText;
+    }
   }
 
   setSourceLang(index: number){
@@ -49,11 +65,8 @@ export class TranslatorComponent implements OnInit{
   }
 
   swap(){
-
-    console.log( this.sourceLangCode + this.targetLangCode);
     const temp: string = this.sourceLangCode as string; // only avaible when sourceLandCode is not null
-    this.sourceLangCode = this.targetLangCode;
+    this.sourceLangCode = this.targetLangCode.substring(0, 2);
     this.targetLangCode = temp;
-    console.log( this.sourceLangCode + this.targetLangCode);
   }
 }
