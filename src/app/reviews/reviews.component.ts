@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./reviews.component.css']
 })
 export class ReviewsComponent {
+  viewName: string = "";
 
+  swapView(view: string){
+    this.viewName = view;
+  }
 }

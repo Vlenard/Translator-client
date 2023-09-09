@@ -6,13 +6,17 @@ import { TranslatorComponent } from './translator/translator.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { ContainerComponent } from './translator/container/container.component';
 import { InputComponent } from './translator/container/input/input.component';
+import { AddComponent } from './reviews/add/add.component';
+import { ReadComponent } from './reviews/read/read.component';
 @NgModule({
   declarations: [
     AppComponent,
     TranslatorComponent,
     ReviewsComponent,
     ContainerComponent,
-    InputComponent
+    InputComponent,
+    AddComponent,
+    ReadComponent
   ],
   imports: [
     BrowserModule

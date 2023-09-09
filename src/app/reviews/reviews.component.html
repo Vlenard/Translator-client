@@ -1,5 +1,19 @@
-<div class="container-fluid">
-    <div>
-        Rev
+<div class="container-fluid px-0 pt-5">
+    <div class="container-fluid d-flex justify-content-center gap-2">
+        <button class="btn btn-light" (click)="swapView('read')">Read reviews</button>
+        <button class="btn btn-light" (click)="swapView('add')">Add reviews</button>
+    </div>
+    <div [ngSwitch]="viewName" class="container-fluid p-0">
+        <ng-container *ngSwitchCase="'add'">
+           <reviews-add /> 
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'read'" >
+            <reviews-read />
+        </ng-container>
+
+        <ng-container *ngSwitchDefault>
+            
+        </ng-container>
     </div>
 </div>

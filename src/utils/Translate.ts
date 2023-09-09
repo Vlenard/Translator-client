@@ -11,12 +11,12 @@ export type TranslateResponse = {
     errorMessage: string | null;
 };
 
-let controller: AbortController;
+let controller: AbortController | null;
 
 export const translate = async (request: TranslateRequest): Promise<TranslateResponse> => {
     
     try {
-        if(controller) controller.abort();
+        if(controller !== null) controller.abort();
 
         controller = new AbortController();
         const res = await fetch(`${env.api}/translate`, {
@@ -27,6 +27,7 @@ export const translate = async (request: TranslateRequest): Promise<TranslateRes
             },
             body: JSON.stringify(request)
         });
+        controller = null;
     
         const data: TranslateResponse = await res.json();
     
