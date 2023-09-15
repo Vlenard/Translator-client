@@ -1,1 +1,25 @@
-<p>add works!</p>
+<div class="container p-3 px-5 border shadow rounded">
+    <div class="row">
+        <div class="col-12 col-md-6 d-flex align-items-center gap-2">
+            <label>
+                Displayed name
+            </label>
+            <div class="px-2 border rounded" style="width: 200px;" contenteditable (input)="onNameTyped($event)"></div>
+        </div>
+
+        <div class="col-12 col-md-6 d-flex justify-content-end">
+            <button class="btn btn-primary px-5 rounded" (click)="onPost($event)">Post</button>
+        </div>
+    </div>
+    <hr>
+    <div class="container-fluid d-flex flex-column gap-2">
+        <label>
+            Review
+        </label>
+        <div class="px-2 border rounded w-full" style="height: 200px;" contenteditable (input)="onReviewTyped($event)"></div>
+    </div>
+    <hr>
+    <div *ngIf="state !== ''" class="container-fluid d-flex justify-content-center p-2">
+        {{state}}
+    </div>
+</div>

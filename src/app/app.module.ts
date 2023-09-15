@@ -8,6 +8,7 @@ import { ContainerComponent } from './translator/container/container.component';
 import { InputComponent } from './translator/container/input/input.component';
 import { AddComponent } from './reviews/add/add.component';
 import { ReadComponent } from './reviews/read/read.component';
+import { LoadingComponent } from './loading/loading.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +17,8 @@ import { ReadComponent } from './reviews/read/read.component';
     ContainerComponent,
     InputComponent,
     AddComponent,
-    ReadComponent
+    ReadComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule

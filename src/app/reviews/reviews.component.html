@@ -3,7 +3,7 @@
         <button class="btn btn-light" (click)="swapView('read')">Read reviews</button>
         <button class="btn btn-light" (click)="swapView('add')">Add reviews</button>
     </div>
-    <div [ngSwitch]="viewName" class="container-fluid p-0">
+    <div [ngSwitch]="viewName" class="container-fluid py-3">
         <ng-container *ngSwitchCase="'add'">
            <reviews-add /> 
         </ng-container>
